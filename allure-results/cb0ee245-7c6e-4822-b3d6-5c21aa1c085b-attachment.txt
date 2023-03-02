@@ -1,0 +1,27 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+                                        Starting Execution: '1 out of 1' test cases in the current suite                                        
+                                                        Test Method: 'others.test.GC01'                                                        
+                                                        Test Description: 'Open Google'                                                        
+------------------------------------------------------------------------------------------------------------------------------------------------
+[ReportManager] Setting "targetOperatingSystem" property with "WINDOWS". @28-02-2023 18:28:14.0140 PM
+[ReportManager] File Action "DoesFileExist" successfully performed. With the following test data "File Path: "target/downloadedFiles/"". @28-02-2023 18:28:14.0140 PM
+[ReportManager] File Action "GetAbsolutePath" successfully performed. With the following test data "Relative Folder Path: "src/login.signIn/resources/testDataFiles/target/downloadedFiles/"". @28-02-2023 18:28:14.0141 PM
+[ReportManager] File Action "DoesFileExist" successfully performed. With the following test data "File Path: "target/downloadedFiles/"". @28-02-2023 18:28:14.0141 PM
+[ReportManager] File Action "GetAbsolutePath" successfully performed. With the following test data "Relative Folder Path: "src/login.signIn/resources/testDataFiles/target/downloadedFiles/"". @28-02-2023 18:28:14.0141 PM
+[ReportManager] Attempting to run locally on: "WINDOWS | Google chrome". @28-02-2023 18:28:14.0142 PM
+[ReportManager] Identifying OS/Driver combination and selecting the correct driver version automatically. Please note that if a new driver executable will be downloaded it may take some time... @28-02-2023 18:28:14.0142 PM
+[ReportManager] Successfully Opened: "WINDOWS | Google chrome". @28-02-2023 18:28:14.0847 PM
+[ReportManager] Setting "targetOperatingSystem" property with "WINDOWS". @28-02-2023 18:28:14.0854 PM
+[ReportManager] File Action "DoesFileExist" successfully performed. With the following test data "File Path: "target/downloadedFiles/"". @28-02-2023 18:28:14.0855 PM
+[ReportManager] File Action "GetAbsolutePath" successfully performed. With the following test data "Relative Folder Path: "src/login.signIn/resources/testDataFiles/target/downloadedFiles/"". @28-02-2023 18:28:14.0855 PM
+[ReportManager] File Action "DoesFileExist" successfully performed. With the following test data "File Path: "target/downloadedFiles/"". @28-02-2023 18:28:14.0856 PM
+[ReportManager] File Action "GetAbsolutePath" successfully performed. With the following test data "Relative Folder Path: "src/login.signIn/resources/testDataFiles/target/downloadedFiles/"". @28-02-2023 18:28:14.0856 PM
+[ReportManager] Attempting to run locally on: "WINDOWS | Google chrome". @28-02-2023 18:28:14.0857 PM
+[ReportManager] Identifying OS/Driver combination and selecting the correct driver version automatically. Please note that if a new driver executable will be downloaded it may take some time... @28-02-2023 18:28:14.0857 PM
+[ReportManager] Successfully Opened: "WINDOWS | Google chrome". @28-02-2023 18:28:15.0542 PM
+[ReportManager] Target URL: "https://www.raneen.com" @28-02-2023 18:28:15.0542 PM
+[ReportManager] Initial URL: "data:," @28-02-2023 18:28:15.0587 PM
+[ReportManager] Navigate to new url failed "https://www.raneen.com". @28-02-2023 18:28:46.0144 PM
+[ReportManager] Successfully created attachment 'Browser Action Exception - Navigate to new url - Stacktrace' @28-02-2023 18:28:46.0145 PM
+[ReportManager] Successfully created attachment 'Screenshot - 1677601725743_GC01_Navigate to new url_failed' @28-02-2023 18:28:46.0152 PM

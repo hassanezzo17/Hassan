@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Extent Reports</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Extent Reports - Powered by SHAFT_Engine</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Feb 28, 2023 06:25:24 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('exception-view')">
+<a id="nav-exception" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bug"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Feb 28, 2023 06:25:24 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Feb 28, 2023 06:28:46 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>0</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>1</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='0%'>
+<b>0</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='100%'><b>1</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='0%'><b>0</b> events passed</small></div>
+<div>
+<small data-tooltip='20%'><b>1</b> events failed,
+<b data-tooltip='%'>4</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Open Google":32.027
+};
+</script>
+<div class="row">
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 0,
+failParent: 1,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 0,
+failEvents: 1,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 4
+};
+</script><div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="fail" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Open Google</p>
+            <p class="text-sm">
+              <span>6:28:14 PM</span> / <span>00:00:32:027</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Open Google</h5>
+<span class='badge badge-success'>02.28.2023 6:28:14 PM</span>
+<span class='badge badge-danger'>02.28.2023 6:28:46 PM</span>
+<span class='badge badge-default'>00:00:32:027</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:28:14 PM</td>
+        <td>
+          Successfully Opened: "WINDOWS | Google chrome".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:28:15 PM</td>
+        <td>
+          Successfully Opened: "WINDOWS | Google chrome".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:28:46 PM</td>
+        <td>
+          Navigate to new url failed "https://www.raneen.com".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:28:46 PM</td>
+        <td>
+          
+    <div class="row mb-3"><div class="col-md-3">
+        <a href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAOUCAYAAABDqi5YAABFw0lEQVR4Xuzdz4sc16Ho8fd33FUCF7QY8EKQhReGLAReCLTQRZuACCZaCF94xgnhYhyMQBgRMILEOELGDxLZEGNDEBLRJUHYiyBt7NHClgwXaxGkha6HIJiFYRaG87qqq7qqzjnVP6ZbmtHR5wNNPFXVp06d6snmq+r5PwEAAAAAAACAIvyfeAMAAAAAAAAAzyYBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAAAAAAAACiEAAwAAAAAAABRCAAYAAAAAAAAohAAMAAAAAAAAUAgBGAAAAAAAAKAQAjAAAAAAAABAIQRgAAAAAAAAgEIIwAAAAAAAAACFEIABAFjLf/zHfzy1FwAAAAAwnwAMAMBa4kj7JF8AAAAAwHwCMAAA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AAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACIEYAAAAAAAAIAIARgAAAAAAAAgQgAGAAAAAAAAiBCAAQAAAAAAACL+BbhQSzKouXo4AAAAAElFTkSuQmCC" data-featherlight="image"><span class="badge badge-gradient-primary">base64 img</span></a>
+        
+    </div></div>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:28:46 PM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: Navigate to new url failed "https://www.raneen.com".
+	at org.testng.Assert.fail(Assert.java:98)
+	at io.github.shafthq.shaft.gui.browser.BrowserActionsHelpers.failAction(BrowserActionsHelpers.java:62)
+	at io.github.shafthq.shaft.gui.browser.BrowserActionsHelpers.failAction(BrowserActionsHelpers.java:55)
+	at io.github.shafthq.shaft.gui.browser.BrowserActionsHelpers.navigateToNewURL(BrowserActionsHelpers.java:134)
+	at com.shaft.gui.browser.BrowserActions.navigateToURL(BrowserActions.java:272)
+	at com.shaft.gui.browser.BrowserActions.navigateToURL(BrowserActions.java:213)
+	at io.github.shafthq.shaft.gui.browser.FluentBrowserActions.navigateToURL(FluentBrowserActions.java:134)
+	at Shaftengine.Main.navigateHomePage(Main.java:15)
+	at others.test.GC01(test.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+Caused by: org.openqa.selenium.TimeoutException: timeout: Timed out receiving message from renderer: -0.011
+  (Session info: chrome=110.0.5481.177)
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '19.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [34a36ae6ad5902f9a6f77d0ebc586782, get {url=https://www.raneen.com}]
+Capabilities {acceptInsecureCerts: true, browserName: chrome, browserVersion: 110.0.5481.177, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\hassa\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:64176}, networkConnectionEnabled: false, pageLoadStrategy: eager, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64176/devtoo..., se:cdpVersion: 110.0.5481.177, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 30000, script: 30000}, unhandledPromptBehavior: accept and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 34a36ae6ad5902f9a6f77d0ebc586782
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:543)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:297)
+	at org.openqa.selenium.remote.RemoteWebDriver$RemoteNavigation.to(RemoteWebDriver.java:983)
+	at io.github.shafthq.shaft.gui.browser.BrowserActionsHelpers.navigateToNewURL(BrowserActionsHelpers.java:132)
+	... 30 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view exception-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Exception</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">java.lang.AssertionError</p>
+<p class="duration text-sm">1 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>java.lang.AssertionError</h4>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>18:28:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Open Google</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>
